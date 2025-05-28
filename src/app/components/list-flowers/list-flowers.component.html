@@ -1,0 +1,12 @@
+<p>list-flowers works!</p>
+<div class='list-flowers'>
+  <p>Total photos: {{numPhotos}}</p>
+<div *ngIf="loading" class="loader">Loading...</div>
+  <div class='list-flowers-photos' *ngIf='!loading'>
+    <div *ngFor="let flower of flowers" class='list-flower-photo'>
+      <img [src]="getFlickrImageUrl(flower, 'z')" [alt]="flower.title" />
+      <p>{{flower.title}}</p>
+    </div>
+
+    <button (click)="loadMore()" class='load-more'>Load More</button>
+</div>

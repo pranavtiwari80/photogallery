@@ -1,0 +1,21 @@
+.list-flowers-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.list-flower-photo {
+  flex: 0 0 calc(20% - 16px); // 5 per row
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-flower-photo img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
