@@ -12,6 +12,7 @@ export class AppComponent {
   flowers: Flower[] = [];
   loading: boolean = false;
   currentPage: number = 1;
+  numPhotos: number = 0;
 
   constructor(private flowerService: FlowerService) {
     this.loadImages(this.selectedFilter, this.currentPage);
@@ -32,6 +33,7 @@ export class AppComponent {
       next: (res) => {
         this.flowers = res.photos.photo;
         this.loading = false;
+        this.numPhotos = +res.photos.total;
       },
       error: () => {
         this.flowers = [];

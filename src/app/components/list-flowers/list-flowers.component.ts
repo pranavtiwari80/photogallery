@@ -9,10 +9,11 @@ import { FlowerService } from 'src/app/services/flower.service';
 })
 export class ListFlowersComponent {
   @Input() flowers: Flower[] = [];
-  numPhotos: number = 0;
+  @Input() numPhotos: number = 0;
   currentPage: number = 1;
   @Input() selectedFilter: string = '';
   @Input() loading: boolean = false;
+
 
   constructor(private flowerService: FlowerService) {}
 

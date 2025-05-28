@@ -2,6 +2,7 @@
   <h1>Flower List</h1>
   <app-top-filters (filterChange)="onFilterChange($event)"></app-top-filters>
   <!-- <app-top-filters (filterChanged)="loadImages($event)"></app-top-filters> -->
-  <app-list-flowers [selectedFilter]="selectedFilter" [flowers]='flowers' (click)="loadMore()" [loading]="loading"></app-list-flowers>
+  <app-list-flowers [selectedFilter]="selectedFilter" [flowers]='flowers' (click)="loadMore()" [loading]="loading" [numPhotos]="numPhotos"></app-list-flowers>
   <!-- <button (click)='loadMore()'>More Flowers</button> -->
+
 </div>
