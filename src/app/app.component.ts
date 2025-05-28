@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FlowerService } from './services/flower.service';
+import { Flower } from './models/flower.model';
 
 @Component({
   selector: 'app-root',
@@ -7,28 +8,40 @@ import { FlowerService } from './services/flower.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Flowers By Colour';
-  flowers: any[] = [];
-   selectedFilter: string = localStorage.getItem('selectedFilter') || 'all';
+  selectedFilter: string = localStorage.getItem('selectedFilter') || 'all';
+  flowers: Flower[] = [];
+  loading: boolean = false;
+  currentPage: number = 1;
 
+  constructor(private flowerService: FlowerService) {
+    this.loadImages(this.selectedFilter, this.currentPage);
+  }
 
-  //colorCodes: string[] = ['all', 'red', 'blue', 'yellow', 'green', 'purple', 'pink'];
-  constructor(private flowerService: FlowerService) { }
+  onFilterChange(filter: string) {
+    this.selectedFilter = filter;
+    this.currentPage = 1;
+    localStorage.setItem('selectedFilter', filter);
+    this.loadImages(filter, 1);
+  }
 
-  // onFilterChange(filter: string): void {
-  //   //localStorage.setItem('selectedFilter', filter);
-
-  // }
-onFilterChange(filter: string) {
-  console.log('Filter changed to:', filter);
-  this.selectedFilter = filter;
-  this.loadImages(filter);
-}
-  loadImages(filter: string) {
+  loadImages(filter: string, page: number) {
+    this.loading = true;
     let filterText = 'flowers';
     let colorCode = filter === 'all' ? undefined : Number(filter);
-    this.flowerService.getFlowers(filterText, 1, colorCode).subscribe((res) => {
-      this.flowers = res.flowers.photo; // Make sure to extract the array
+    this.flowerService.getFlowers(filterText, page, colorCode).subscribe({
+      next: (res) => {
+        this.flowers = res.photos.photo;
+        this.loading = false;
+      },
+      error: () => {
+        this.flowers = [];
+        this.loading = false;
+      }
     });
+  }
+
+  loadMore() {
+    this.currentPage++;
+    this.loadImages(this.selectedFilter, this.currentPage);
   }
 }
