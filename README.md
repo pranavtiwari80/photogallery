@@ -10,6 +10,7 @@ and create a file under it with name environment.ts
 environment.ts (src/environments/environment.ts) and paste the following code there
 
 export const environment = {
+  
   production: false,
   flickrApiKey: '' //Add your flickrApiKey here
   
