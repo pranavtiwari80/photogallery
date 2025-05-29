@@ -12,6 +12,7 @@ environment.ts (src/environments/environment.ts) and paste the following code th
 export const environment = {
   production: false,
   flickrApiKey: '' //Add your flickrApiKey here
+  
 };
 
 then go to your root folder of this clone on local and run the following command
