@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Flower } from 'src/app/models/flower.model';
 import { FlowerService } from 'src/app/services/flower.service';
 
@@ -13,21 +13,26 @@ export class ListFlowersComponent {
   currentPage: number = 1;
   @Input() selectedFilter: string = '';
   @Input() loading: boolean = false;
+  @Output() loadMoreClicked = new EventEmitter<void>();
+
 
 
   constructor(private flowerService: FlowerService) {}
 
-  onFilterChange(filter: string): void {
-    this.selectedFilter = filter;
-    localStorage.setItem('selectedFilter', filter);
-    this.currentPage = 1;
+  // onFilterChange(filter: string): void {
+  //   this.selectedFilter = filter;
+  //   localStorage.setItem('selectedFilter', filter);
+  //   this.currentPage = 1;
+  //   //this.loadFlowers();
+  // }
+
+  loadMore(): void {
+    console.log('Loading more flowers...');
+    this.loadMoreClicked.emit();
     //this.loadFlowers();
   }
 
-  loadMore(): void {
-    this.currentPage++;
-    //this.loadFlowers();
-  }
+
   getFlickrImageUrl(flower: any, size: string = ''): string {
     const suffix = size ? `_${size}` : '';
     return `https://farm${flower.farm}.staticflickr.com/${flower.server}/${flower.id}_${flower.secret}${suffix}.jpg`;
