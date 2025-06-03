@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class FlowerService {
   private apiUrl =
     `https://api.flickr.com/services/rest/?method=flickr.photos.search&text=flowers&api_key=${environment.flickrApiKey}&format=json&nojsoncallback=1&page=1&per_page=20`;
-  private apiKey = 'a5e95177da353f58113fd60296e1d250';
+  private apiKey = environment.flickrApiKey;
   private baseUrl = 'https://api.flickr.com/services/rest/';
   private perPage = 20;
 
